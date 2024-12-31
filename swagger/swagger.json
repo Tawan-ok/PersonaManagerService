@@ -1,0 +1,96 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Person API",
+      "version": "1.0.0",
+      "description": "API for managing person data"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "schemes": ["http"],
+    "paths": {
+      "/person": {
+        "get": {
+          "summary": "Get all persons",
+          "responses": {
+            "200": {
+              "description": "A list of persons",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Person"
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new person",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "person",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Person"
+              }
+            }
+          ],
+          "responses": {
+            "201": { "description": "Person created successfully" }
+          }
+        }
+      },
+      "/person/{id}": {
+        "put": {
+          "summary": "Update a person",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "body",
+              "name": "person",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Person"
+              }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Person updated successfully" }
+          }
+        },
+        "delete": {
+          "summary": "Delete a person",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": { "description": "Person deleted successfully" }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Person": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": "string" },
+          "lastName": { "type": "string" },
+          "birthDate": { "type": "string", "format": "date" },
+          "age": { "type": "integer" },
+          "gender": { "type": "string" }
+        }
+      }
+    }
+  }
+  
